@@ -87,22 +87,25 @@ public class Main {
             e.printStackTrace();
         }
 
-        // Write the report
+        // Write the report, iterating through the animal objects and outputting the data by species with name and age
+        // At the end of the report, pull the HashMap data to show a tally of animals per species
 
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("./ZooApp/newAnimals.txt"));
             String animalReport;
+            writer.write(" -+- Super Snazzy New Animal Report -+- \n");
             for (Animal animal : animals) {
                 animalReport = ("\n" + "[Animal] " + animal.getSpecies() + " [Name] " + animal.getName() + " [Age] "
                         + animal.getAge());
                 writer.write(animalReport);
             }
-            writer.write("\n" + "Current Species Count: ");
+            writer.write("\n\n" + "Current Species Count: ");
             for (Animal animal : animals) {
                 String animalType = animal.getSpecies();
                 animalCount.put(animalType, animalCount.getOrDefault(animalType, 0) + 1);
             }
             writer.write(animalCount.toString());
+            writer.write("\n" + "Total Number of Animals: " + Animal.numOfAnimals);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
